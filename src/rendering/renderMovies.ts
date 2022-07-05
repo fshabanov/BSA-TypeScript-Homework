@@ -4,7 +4,7 @@ import createCard from '../createCard';
 function renderMovies(movies: IMovieMapped[], isNewCategory = false): void {
     const favMovStr = localStorage.getItem('favMovies');
     if (!favMovStr) return;
-    let favMovies: number[] = JSON.parse(favMovStr);
+    const favMovies: number[] = JSON.parse(favMovStr);
     const mainContainer: HTMLDivElement = document.getElementById(
         'film-container'
     ) as HTMLDivElement;

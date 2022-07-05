@@ -6,7 +6,7 @@ async function renderFavMovies(): Promise<void> {
     const moviesStr = localStorage.getItem('favMovies');
     const movies: IMovieMapped[] = await fetchFavMovies();
     if (!moviesStr) return;
-    let favMovieIds: number[] = JSON.parse(moviesStr);
+    const favMovieIds: number[] = JSON.parse(moviesStr);
     const mainContainer: HTMLDivElement = document.getElementById(
         'favorite-movies'
     ) as HTMLDivElement;

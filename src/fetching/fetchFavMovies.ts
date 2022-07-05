@@ -6,7 +6,7 @@ async function fetchFavMovies(): Promise<IMovieMapped[]> {
     const favMovieIdsStr = localStorage.getItem('favMovies');
     const movies: IMovieMapped[] = [];
     if (!favMovieIdsStr) return movies;
-    let favMovieIds: number[] = JSON.parse(favMovieIdsStr);
+    const favMovieIds: number[] = JSON.parse(favMovieIdsStr);
     const promises = [];
     for (const movieId of favMovieIds) {
         promises.push(

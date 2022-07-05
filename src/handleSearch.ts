@@ -1,20 +1,11 @@
 import { setCategory } from './categorySelect';
-import mapper from './movieMapper';
-import renderMovies from './rendering/renderMovies';
-import { BASE_URL, API_KEY } from './tmdb';
+import fetchSearch from './fetching/fetchSearch';
+import { setPage } from './loadMore';
 function handleSearch(e: SubmitEvent): void {
     e.preventDefault();
-    const input: HTMLInputElement = document.getElementById(
-        'search'
-    ) as HTMLInputElement;
-    const value = input.value;
-    fetch(`${BASE_URL}search/movie?api_key=${API_KEY}&query=${value}`)
-        .then((res) => res.json())
-        .then((data) => mapper(data.results))
-        .then((movies) => {
-            renderMovies(movies, true);
-        });
+    fetchSearch();
     setCategory('');
+    setPage(1);
 }
 
 export default handleSearch;
