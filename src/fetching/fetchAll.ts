@@ -1,6 +1,6 @@
-import { Category, IMovieMapped } from './@types/IMovie';
-import mapper from './movieMapper';
-import { BASE_URL, API_KEY } from './tmdb';
+import { Category, IMovieMapped } from '../@types/IMovie';
+import mapper from '../movieMapper';
+import { BASE_URL, API_KEY } from '../tmdb';
 
 async function fetchAll(
     category: Category | '' = Category.Popular,

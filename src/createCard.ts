@@ -1,23 +1,25 @@
+import { IMAGE_BASE_URL } from './tmdb';
 import { IMovieMapped } from './@types/IMovie';
 import toggleFav from './toggleFav';
 
 function createCard(
     movie: IMovieMapped,
-    favMovies: IMovieMapped[],
+    favMovies: number[],
     favMovie = false
 ): HTMLDivElement {
     const container: HTMLDivElement = document.createElement('div');
-    if (favMovie) {
-        container.classList.add('col-12', 'p-2');
-    } else {
-        container.classList.add('col-lg-3', 'col-md-4', 'col-12', 'p-2');
+    container.classList.add('col-12', 'p-2');
+    if (!favMovie) {
+        container.classList.add('col-lg-3', 'col-md-4');
     }
     // wrapper
     const wrapper: HTMLDivElement = document.createElement('div');
     wrapper.classList.add('card', 'shadow-sm');
     // image
     const image: HTMLImageElement = document.createElement('img');
-    image.src = `https://image.tmdb.org/t/p/w500${movie.imageUrl}`;
+    image.src = movie.imageUrl
+        ? `${IMAGE_BASE_URL}w500${movie.imageUrl}`
+        : '../image_placeholder.png';
     // svg
     const svg: SVGElement = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -28,13 +30,15 @@ function createCard(
     svg.setAttribute('stroke', 'red');
     svg.setAttribute(
         'fill',
-        favMovies?.find((favMovie) => favMovie.id === movie.id)
+        favMovies?.find((favMovie) => favMovie === movie.id)
             ? 'red'
             : '#ff000078'
     ); // #ff000078 if not liked
     svg.setAttribute('viewBox', '0 -2 18 22');
     svg.classList.add('bi', 'bi-heart-fill', 'position-absolute', 'p-2');
-    svg.setAttribute('data-id', movie.id.toString());
+    if (!favMovie) {
+        svg.setAttribute('data-id', movie.id.toString());
+    }
     svg.onclick = () => toggleFav(movie);
 
     // path

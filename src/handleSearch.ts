@@ -1,6 +1,6 @@
 import { setCategory } from './categorySelect';
 import mapper from './movieMapper';
-import renderMovies from './renderMovies';
+import renderMovies from './rendering/renderMovies';
 import { BASE_URL, API_KEY } from './tmdb';
 function handleSearch(e: SubmitEvent): void {
     e.preventDefault();

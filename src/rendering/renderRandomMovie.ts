@@ -1,4 +1,5 @@
-import { IMovieMapped } from './@types/IMovie';
+import { IMAGE_BASE_URL } from './../tmdb';
+import { IMovieMapped } from '../@types/IMovie';
 
 function renderRandomMovie(movies: IMovieMapped[]): void {
     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
@@ -14,7 +15,7 @@ function renderRandomMovie(movies: IMovieMapped[]): void {
     const section: HTMLElement = document.getElementById(
         'random-movie'
     ) as HTMLElement;
-    section.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${randomMovie.horizontalImageUrl})`;
+    section.style.backgroundImage = `url(${IMAGE_BASE_URL}original${randomMovie.horizontalImageUrl})`;
 }
 
 export default renderRandomMovie;

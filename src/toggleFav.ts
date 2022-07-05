@@ -1,19 +1,19 @@
 import { IMovieMapped } from './@types/IMovie';
-import renderFavMovies from './renderFavMovies';
+import renderFavMovies from './rendering/renderFavMovies';
 
-function toggleFav(movie: IMovieMapped): void {
+async function toggleFav(movie: IMovieMapped): Promise<void> {
     const favMovStr = localStorage.getItem('favMovies');
-    let favMovies: IMovieMapped[] = [];
+    let favMovies: number[] = [];
     if (favMovStr) favMovies = JSON.parse(favMovStr);
     const svg: SVGElement = document.querySelector(
         `svg[data-id="${movie.id}"]`
     ) as SVGElement;
-    if (favMovies?.find((favMovie) => favMovie.id === movie.id)) {
+    if (favMovies?.find((favMovie) => favMovie === movie.id)) {
         svg.setAttribute('fill', '#ff000078');
-        favMovies = favMovies.filter((favMovie) => favMovie.id !== movie.id);
+        favMovies = favMovies.filter((favMovie) => favMovie !== movie.id);
     } else {
         svg.setAttribute('fill', 'red');
-        favMovies.push(movie);
+        favMovies.push(movie.id);
     }
     localStorage.setItem('favMovies', JSON.stringify(favMovies));
     renderFavMovies();

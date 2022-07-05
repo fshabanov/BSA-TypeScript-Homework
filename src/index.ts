@@ -1,10 +1,10 @@
 import { listenForCategoryChange } from './categorySelect';
-import { fetchAll } from './fetchAll';
+import { fetchAll } from './fetching/fetchAll';
 import handleSearch from './handleSearch';
 import loadMore from './loadMore';
-import renderFavMovies from './renderFavMovies';
-import renderMovies from './renderMovies';
-import renderRandomMovie from './renderRandomMovie';
+import renderFavMovies from './rendering/renderFavMovies';
+import renderMovies from './rendering/renderMovies';
+import renderRandomMovie from './rendering/renderRandomMovie';
 
 export async function render(): Promise<void> {
     // TODO render your app here
