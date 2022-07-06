@@ -1,19 +1,27 @@
+import { category } from '../categorySelect';
 import mapper from '../movieMapper';
 import renderMovies from '../rendering/renderMovies';
 import { BASE_URL, API_KEY } from './../tmdb';
-function fetchSearch(page = 1, isNewSearch = true): void {
+import { fetchAll } from './fetchAll';
+async function fetchSearch(page = 1, isNewSearch = true): Promise<void> {
     const input: HTMLInputElement = document.getElementById(
         'search'
     ) as HTMLInputElement;
     const query = input.value;
-    fetch(
-        `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
-    )
-        .then((res) => res.json())
-        .then((data) => mapper(data.results))
-        .then((movies) => {
-            renderMovies(movies, isNewSearch);
-        });
+    if (!query) {
+        const movies = await fetchAll();
+        renderMovies(movies, true);
+    } else {
+        fetch(
+            `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
+        )
+            .then((res) => res.json())
+            .then((data) => mapper(data.results))
+            .then((movies) => {
+                renderMovies(movies, isNewSearch);
+            })
+            .catch((err) => alert(err.message));
+    }
 }
 
 export default fetchSearch;

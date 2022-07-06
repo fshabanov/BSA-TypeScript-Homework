@@ -29,6 +29,18 @@ export async function render(): Promise<void> {
     ) as HTMLFormElement;
     form.onsubmit = handleSearch;
 
+    // searching as typing
+    const input: HTMLInputElement = document.getElementById(
+        'search'
+    ) as HTMLInputElement;
+    let timer: NodeJS.Timeout;
+    input.onkeydown = (e: Event) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            handleSearch(e);
+        }, 500);
+    };
+
     // favourite movies
     renderFavMovies();
 }

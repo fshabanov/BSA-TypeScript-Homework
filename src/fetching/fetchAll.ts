@@ -13,7 +13,8 @@ async function fetchAll(
         )
             .then((res) => res.json())
             .then((data) => mapper(data.results))
-            .then((movieData) => (movies = movieData));
+            .then((movieData) => (movies = movieData))
+            .catch((err) => alert(err.message));
     }
     return movies;
 }

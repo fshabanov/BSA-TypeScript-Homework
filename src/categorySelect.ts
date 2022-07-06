@@ -1,5 +1,7 @@
 import { Category } from './@types/IMovie';
+import clearInput from './clearInput';
 import { fetchAll } from './fetching/fetchAll';
+import { setSearch } from './handleSearch';
 import { setPage } from './loadMore';
 import renderMovies from './rendering/renderMovies';
 
@@ -27,6 +29,8 @@ function listenForCategoryChange(): void {
         if (popular.checked && category !== Category.Popular) {
             setCategory(Category.Popular);
         }
+        clearInput();
+        setSearch(false);
     };
 
     const upcoming: HTMLInputElement = document.getElementById(
@@ -36,6 +40,8 @@ function listenForCategoryChange(): void {
         if (upcoming.checked && category !== Category.Upcoming) {
             setCategory(Category.Upcoming);
         }
+        clearInput();
+        setSearch(false);
     };
 
     const topRated: HTMLInputElement = document.getElementById(
@@ -45,6 +51,8 @@ function listenForCategoryChange(): void {
         if (topRated.checked && category !== Category.TopRated) {
             setCategory(Category.TopRated);
         }
+        clearInput();
+        setSearch(false);
     };
 }
 
