@@ -4,9 +4,9 @@ import fetchFavMovies from '../fetching/fetchFavMovies';
 
 async function renderFavMovies(): Promise<void> {
     const moviesStr = localStorage.getItem('favMovies');
-    const movies: IMovieMapped[] = await fetchFavMovies();
     if (!moviesStr) return;
     const favMovieIds: number[] = JSON.parse(moviesStr);
+    const movies: IMovieMapped[] = await fetchFavMovies(favMovieIds);
     const mainContainer: HTMLDivElement = document.getElementById(
         'favorite-movies'
     ) as HTMLDivElement;

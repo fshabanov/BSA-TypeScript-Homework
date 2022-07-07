@@ -7,8 +7,6 @@ import renderMovies from './rendering/renderMovies';
 import renderRandomMovie from './rendering/renderRandomMovie';
 
 export async function render(): Promise<void> {
-    // TODO render your app here
-
     // initial render
     const movies = await fetchAll();
     renderMovies(movies);
@@ -34,12 +32,12 @@ export async function render(): Promise<void> {
         'search'
     ) as HTMLInputElement;
     let timer: NodeJS.Timeout;
-    input.onkeydown = (e: Event) => {
+    input.addEventListener('input', (e: Event) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
             handleSearch(e);
         }, 500);
-    };
+    });
 
     // favourite movies
     renderFavMovies();

@@ -30,4 +30,23 @@ interface IMovieMapped {
     horizontalImageUrl: string;
 }
 
-export { Category, IMovieMapped, IMovieOriginal };
+interface IResponseData {
+    results: IMovieOriginal[];
+    page: number;
+    total_pages: number;
+    total_results: number;
+}
+
+interface IResponseError {
+    status_code: number;
+    status_message: string;
+    success: boolean;
+}
+
+export {
+    Category,
+    IMovieMapped,
+    IMovieOriginal,
+    IResponseData,
+    IResponseError,
+};
